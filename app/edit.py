@@ -47,7 +47,7 @@ def valid_name(name):
 def fetch_source():
     if os.path.isdir("/tmp/source/.git"):
         print("pulling {}".format(os.environ.get("SOURCE_GIT_URL")))
-        porcelain.pull("/tmp/source", os.environ["SOURCE_GIT_URL"], "refs/heads/dev")
+        porcelain.pull("/tmp/source", os.environ["SOURCE_GIT_URL"], "dev")
     else:
         print("cloning")
         porcelain.clone(os.environ["SOURCE_GIT_URL"], "/tmp/source")
@@ -80,7 +80,7 @@ def update_git(page, new_md, username, user):
     commit_message = "Page {} updated".format(page)
     porcelain.commit("/tmp/source", commit_message, author=author, committer=committer)
     print("pushing")
-    porcelain.push("/tmp/source", os.environ["SOURCE_GIT_URL"], "refs/heads/dev")
+    porcelain.push("/tmp/source", os.environ["SOURCE_GIT_URL"], "dev")
     print("pushed")
 
 
