@@ -10,13 +10,17 @@ from dulwich.contrib.paramiko_vendor import ParamikoSSHVendor
 
 from app import templating
 
+SECRET_PATH = "/serverless-wiki/id_rsa"
+
+secrets_manager = boto3.client("secretsmanager")
+
 
 class MyParamikoSSHVendor(ParamikoSSHVendor):
     def __init__(self, **kwargs):
         super(MyParamikoSSHVendor, self).__init__(**kwargs)
         path = sys.path[0] + "/id_rsa"
-        secrets = boto3.client("secretsmanager")
-        rsa_data = secrets.get_secret_value(SecretId="/serverless-wiki/id_rsa")
+        print("Downloading SSH key from secrets manager:  {}".format(SECRET_PATH))
+        rsa_data = secrets_manager.get_secret_value(SecretId=SECRET_PATH)
         with open(path, "wb") as fh:
             fh.write(rsa_data.get("SecretString"))
         self.ssh_kwargs = {
