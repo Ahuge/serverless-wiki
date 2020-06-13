@@ -17,6 +17,9 @@ types = {
     ".css": "text/css",
     ".js": "application/javascript; charset=UTF-8",
     ".hocon": "application/hocon",
+    ".ico": "image/ico",
+    ".png": "image/png",
+    ".jpg": "image/jpg",
 }
 
 print("Uploading to {}".format(os.environ.get("BUCKET_NAME")))
