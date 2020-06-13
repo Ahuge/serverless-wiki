@@ -10,7 +10,7 @@ import boto3
 s3 = boto3.resource("s3")
 
 bucket = s3.Bucket(os.environ.get("BUCKET_NAME"))
-top = "target"
+top = "target/website"
 
 types = {
     ".html": "text/html",
