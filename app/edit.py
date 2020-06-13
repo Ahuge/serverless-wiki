@@ -102,7 +102,7 @@ def handler(event, context):
 
     print("checking bcrypt hash")
     if not bcrypt.checkpw((os.environ["NONCE"] + auth).encode("utf-8"), user.get_string("password_hash").encode("utf-8")):
-        return error("401", "Invalid password")
+        return error(401, "Invalid password")
 
     print("applying template")
     apiId = event["requestContext"]["apiId"]
@@ -112,7 +112,7 @@ def handler(event, context):
     update_storage(page, new_html)
 
     return {
-        "statusCode": "200",
+        "statusCode": 200,
         "body": new_html,
         "headers": {
             "Content-Type": "text/html",
