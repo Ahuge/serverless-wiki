@@ -1,6 +1,6 @@
 name: Build Website and push to s3
 
-on: [commit]
+on: [push]
 
 jobs:
     build-website:
