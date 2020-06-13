@@ -1,4 +1,4 @@
-# This is a basic page!!!!!!!!!!
+# This is a basic page!!!!!!!
 
 
 ### Pages of Information:
