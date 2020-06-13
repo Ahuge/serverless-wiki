@@ -91,6 +91,7 @@ def update_git(page, new_md, username, user):
     porcelain.commit("/tmp/source", commit_message, author=author, committer=committer)
     print("pushing")
     porcelain.push("/tmp/source", os.environ["SOURCE_GIT_URL"], "refs/heads/dev")
+    os.system("cd {folder}; git push -u origin {branch}".format(folder="/tmp/source", branch="dev"))
     print("pushed")
 
 
