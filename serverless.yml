@@ -11,6 +11,7 @@ provider:
     SOURCE_GIT_URL: "${self:custom.parameters.source_git_url.${self:custom.stage}, self:custom.parameters.source_git_url.default}"
     NONCE: "${self:custom.parameters.nonce.${self:custom.stage}, self:custom.parameters.nonce.default}"
     BUCKET_NAME: "${self:custom.parameters.bucketName.${self:custom.stage}, self:custom.parameters.bucketName.default}"
+    STAGE: "${self:custom.stage}"
   # environment:
   #   API_ENDPOINT: ${self:custom.parameters.ApiEndpoint.${self:custom.stage}, self:custom.parameters.ApiEndpoint.default}
   #   MANE_API_RESOURCE: ${self:custom.parameters.ApiResource.${self:custom.stage}, self:custom.parameters.ApiResource.default}
