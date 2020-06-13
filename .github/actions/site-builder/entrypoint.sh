@@ -4,14 +4,16 @@
 git clone https://github.com/Ahuge/serverless-wiki source
 mkdir target
 
-export MARKDOWN_SOURCE_ROOT="./source/website/pages"
+export MARKDOWN_SOURCE_ROOT="source/website/pages"
 
 # generate.sh
 [[ -d source ]] || exit "Please set SOURCE to the source git directory"
 [[ -d target ]] || exit "Please set TARGET to the target git directory"
 
-cp -r ./source/website/resources/* target
-cp -r ./source/users target
+ls -alFh
+
+cp -r source/website/resources/* target
+cp -r source/users target
 
 # And convert $SOURCE/pages/*.md to $TARGET/*.html :)
 
