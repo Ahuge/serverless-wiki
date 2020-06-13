@@ -14,9 +14,9 @@ serverless-wiki
 </section>
 <section style="text-align: right; padding: 20px">
 <a id="loginlink" href="#" onclick="document.getElementById('login').style.display = 'block'">Log in</a>
-<a href="#" onclick="save()" class="edit">save</a>
-<div class="editnew"><input id="new-page" type="text"/><a href="#" onclick="saveas()" class="edit">save</a></div>
-<a href="#" onclick="newpage()" class="loggedin noedit">save</a>
+<a href="#" onclick="save()" class="save edit">save</a>
+<div class="newpage"><input id="new-page" type="text"/><a href="#" onclick="saveas()" class="edit">save</a></div>
+<a href="#" onclick="newpage()" class="loggedin noedit">new</a>
 <a href="#" onclick="edit()" class="loggedin noedit">edit</a>
 <span id="loggedin" class="loggedin"></span>
 <a id="logoutlink" href="#" onclick="logout()" class="loggedin">Log out</a>
@@ -106,11 +106,12 @@ function edit() {
 }
 
 function newpage() {
-  $('.editnew').show()
+  $('.newpage').show()
   simplemde = new SimpleMDE()
 
   $('.noedit').hide()
   $('.edit').show()
+  $('.save').hide()
 }
 
 function page() {
