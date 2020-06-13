@@ -6,7 +6,7 @@ jobs:
     build-website:
         runs-on: ubuntu-latest
         steps:
-            - uses: ./.github/actions/site-builder
+            - uses: Ahuge/serverless-wiki/.github/actions/site-builder@dev
               name: Build Site
               env:
                 GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
