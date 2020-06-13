@@ -52,7 +52,8 @@ def fetch_source():
     os.system("cd {folder}; git checkout {branch}".format(folder="/tmp/source", branch="dev"))
 
     print("pulling {}".format(os.environ.get("SOURCE_GIT_URL")))
-    porcelain.pull("/tmp/source", os.environ["SOURCE_GIT_URL"], "dev")
+    porcelain.fetch("/tmp/source", os.environ["SOURCE_GIT_URL"])
+    porcelain.pull("/tmp/source", os.environ["SOURCE_GIT_URL"], "refs/heads/dev")
     print("updated")
 
 
@@ -89,7 +90,7 @@ def update_git(page, new_md, username, user):
     commit_message = "Page {} updated".format(page)
     porcelain.commit("/tmp/source", commit_message, author=author, committer=committer)
     print("pushing")
-    porcelain.push("/tmp/source", os.environ["SOURCE_GIT_URL"], "dev")
+    porcelain.push("/tmp/source", os.environ["SOURCE_GIT_URL"], "refs/heads/dev")
     print("pushed")
 
 
