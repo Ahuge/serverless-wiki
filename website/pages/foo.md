@@ -1,4 +1,4 @@
-# This is a basic page!
+# Welcome to Foo
 
 
 ### Pages of Information:
