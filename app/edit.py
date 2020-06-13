@@ -68,7 +68,7 @@ def update_storage(page, html):
 
 
 def update_git(page, new_md, username, user):
-    filename = "/tmp/source/%s.md" % page
+    filename = "/tmp/source/website/pages/%s.md" % page
     with open(filename, "w") as text_file:
         text_file.write(new_md)
 
