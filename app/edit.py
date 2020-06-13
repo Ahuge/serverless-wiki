@@ -78,8 +78,8 @@ def update_git(page, new_md, username, user):
     with open(filename, "w") as text_file:
         text_file.write(new_md)
 
-    porcelain.add("/tmp/source")
-    print("adding {}".fromat(filename))
+    porcelain.add("/tmp/source", filename)
+    print("adding {}".format(filename))
 
     author = user.get_string("full_name") + " <" + username + "@invalid>"
     committer = "lambda <lambda@lambda.aws>"
