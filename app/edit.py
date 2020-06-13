@@ -127,5 +127,7 @@ def handler(event, context):
         "headers": {
             "Content-Type": "text/html",
             "Access-Control-Allow-Origin": "*",
-        }
+            'Access-Control-Allow-Methods': 'OPTIONS,POST,GET',
+            'Access-Control-Allow-Headers': 'Content-Type',
+        },
     }
