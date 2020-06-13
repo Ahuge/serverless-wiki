@@ -45,12 +45,12 @@ def valid_name(name):
 
 
 def fetch_source():
-    if os.path.isdir("/tmp/source/.git"):
-        print("pulling {}".format(os.environ.get("SOURCE_GIT_URL")))
-        porcelain.pull("/tmp/source", os.environ["SOURCE_GIT_URL"], "dev")
-    else:
+    if not os.path.isdir("/tmp/source/.git"):
         print("cloning")
         porcelain.clone(os.environ["SOURCE_GIT_URL"], "/tmp/source")
+
+    print("pulling {}".format(os.environ.get("SOURCE_GIT_URL")))
+    porcelain.pull("/tmp/source", os.environ["SOURCE_GIT_URL"], b"ref/heads/dev")
     print("updated")
 
 
@@ -80,7 +80,7 @@ def update_git(page, new_md, username, user):
     commit_message = "Page {} updated".format(page)
     porcelain.commit("/tmp/source", commit_message, author=author, committer=committer)
     print("pushing")
-    porcelain.push("/tmp/source", os.environ["SOURCE_GIT_URL"], "dev")
+    porcelain.push("/tmp/source", os.environ["SOURCE_GIT_URL"], b"ref/heads/dev")
     print("pushed")
 
 
@@ -116,7 +116,7 @@ def handler(event, context):
 
     print("applying template")
     apiId = event["requestContext"]["apiId"]
-    new_html = templating.apply_template(event["body"], "https://" + apiId + ".execute-api." + os.environ["AWS_REGION"] + ".amazonaws.com/sw_prod")
+    new_html = templating.apply_template(event["body"], "https://" + apiId + ".execute-api." + os.environ["AWS_REGION"] + ".amazonaws.com/{stage}".format(stage=os.environ.get("STAGE")))
 
     update_git(page, event["body"], username, user)
     update_storage(page, new_html)
