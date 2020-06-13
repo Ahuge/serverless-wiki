@@ -1,5 +1,10 @@
-# This is a basic page!!!!!!!
+# This page is for testing
 
 
-### Pages of Information:
-  - [test_page](test.html)
+![My Image](https://app.archpt.io/static/media/arch.bea81e51.svg)
+
+
+
+
+
+[go home](index.html)
