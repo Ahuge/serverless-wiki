@@ -11,6 +11,9 @@ body {
 .edit {
   display: none;
 }
+.newpage {
+  display: none;
+}
 .loggedin {
   display: none;
 }
