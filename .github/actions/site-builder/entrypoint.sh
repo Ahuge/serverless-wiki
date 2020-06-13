@@ -17,7 +17,7 @@ cp -r source/users target
 for file in `cd source; find . -name "*.md"`; do
   mkdir -p target/`dirname ${file}`
   echo "Processing source/$file into target/${file%md}html"
-  python ./convert_page.py < source/${file} > target/${file%md}html
+  python ${CODE}/.github/actions/site-builder/convert_page.py < source/${file} > target/${file%md}html
 done
 # end generate.sh
 
@@ -25,4 +25,4 @@ ls -alFh target
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # deploy
-python ./deploy.py
+python ${CODE}/.github/actions/site-builder/deploy.py
