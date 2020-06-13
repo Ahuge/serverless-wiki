@@ -50,7 +50,7 @@ def fetch_source():
         porcelain.clone(os.environ["SOURCE_GIT_URL"], "/tmp/source")
 
     print("pulling {}".format(os.environ.get("SOURCE_GIT_URL")))
-    porcelain.pull("/tmp/source", os.environ["SOURCE_GIT_URL"], b"ref/heads/dev")
+    porcelain.pull("/tmp/source", os.environ["SOURCE_GIT_URL"], "dev")
     print("updated")
 
 
@@ -80,7 +80,7 @@ def update_git(page, new_md, username, user):
     commit_message = "Page {} updated".format(page)
     porcelain.commit("/tmp/source", commit_message, author=author, committer=committer)
     print("pushing")
-    porcelain.push("/tmp/source", os.environ["SOURCE_GIT_URL"], b"ref/heads/dev")
+    porcelain.push("/tmp/source", os.environ["SOURCE_GIT_URL"], "dev")
     print("pushed")
 
 
