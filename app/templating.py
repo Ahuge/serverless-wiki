@@ -1,5 +1,5 @@
 import sys
-import markdown2
+from app import markdown2
 
 PAGE_CONTENT_LINE = "<!-- PAGE_CONTENT_HERE -->\n"
 PAGE_SOURCE_LINE = "<!-- PAGE_SOURCE_HERE -->\n"
