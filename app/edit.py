@@ -85,7 +85,7 @@ def update_git(page, new_md, username, user):
     print("adding {}".format(filename))
 
     author = "Alex Hughes <alex@archpt.io>"
-    committer = "{} <{}}@serverless-wiki.lambda.aws>".format(user.get_string("full_name"), username)
+    committer = "{} <{}@serverless-wiki.lambda.aws>".format(user.get_string("full_name"), username)
     print("committing")
     commit_message = "Page {} updated".format(page)
     porcelain.commit("/tmp/source", commit_message, author=author, committer=committer)
