@@ -18,7 +18,7 @@ secrets_manager = boto3.client("secretsmanager")
 class MyParamikoSSHVendor(ParamikoSSHVendor):
     def __init__(self, **kwargs):
         super(MyParamikoSSHVendor, self).__init__(**kwargs)
-        path = sys.path[0] + "/id_rsa"
+        path = "/tmp/id_rsa"
         print("Downloading SSH key from secrets manager:  {}".format(SECRET_PATH))
         rsa_data = secrets_manager.get_secret_value(SecretId=SECRET_PATH)
         with open(path, "wb") as fh:
