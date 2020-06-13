@@ -66,8 +66,8 @@ custom:
       dev: Bloop
 
     source_git_url:
-      default: "git@githb.com:Ahuge/serverless-wiki-data"
-      dev: "git@githb.com:Ahuge/serverless-wiki-data"
+      default: "https://github.com/Ahuge/serverless-wiki"
+      dev: "https://github.com/Ahuge/serverless-wiki"
 
     DeletionPolicy:
       default: Retain
