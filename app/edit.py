@@ -49,6 +49,8 @@ def fetch_source():
         print("cloning")
         porcelain.clone(os.environ["SOURCE_GIT_URL"], "/tmp/source")
 
+    os.system("cd {folder}; git checkout {branch}".format(folder="/tmp/source", branch="dev"))
+
     print("pulling {}".format(os.environ.get("SOURCE_GIT_URL")))
     porcelain.pull("/tmp/source", os.environ["SOURCE_GIT_URL"], "dev")
     print("updated")
@@ -81,8 +83,8 @@ def update_git(page, new_md, username, user):
     porcelain.add("/tmp/source", filename)
     print("adding {}".format(filename))
 
-    author = user.get_string("full_name") + " <" + username + "@invalid>"
-    committer = "lambda <lambda@lambda.aws>"
+    author = "Alex Hughes <alex@archpt.io>"
+    committer = "{} <{}}@serverless-wiki.lambda.aws>".format(user.get_string("full_name"), username)
     print("committing")
     commit_message = "Page {} updated".format(page)
     porcelain.commit("/tmp/source", commit_message, author=author, committer=committer)
