@@ -18,6 +18,12 @@ iamRoleStatements:
       - "logs:PutLogEvents"
     Resource:
       - "arn:aws:logs:*:*:*"
+
+  - Effect: "Allow"
+    Action:
+      - "secretsmanager:GetSecretValue"
+    Resource:
+      - "arn:aws:secretsmanager:*:*:secret:/serverless-wiki/id_rsa"
 #  - Effect: "Allow"
 #    Action:
 #      - "sts:AssumeRole"
