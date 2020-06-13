@@ -1,5 +1,10 @@
 # Welcome to Foo
 
 
-### Pages of Information:
-  - [test_page](test.html)
+
+
+
+
+
+
+[go home](index.html)
