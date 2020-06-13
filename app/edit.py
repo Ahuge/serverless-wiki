@@ -70,13 +70,16 @@ def update_storage(page, html):
 def update_git(page, new_md, username, user):
     for name in os.listdir("/tmp/source"):
         print(name)
+    print("-----")
     for name in os.listdir("/tmp/source/website/pages"):
         print(name)
     filename = "/tmp/source/website/pages/%s.md" % page
+
     with open(filename, "w") as text_file:
         text_file.write(new_md)
 
-    porcelain.add("/tmp/source", filename)
+    porcelain.add("/tmp/source")
+    print("adding {}".fromat(filename))
 
     author = user.get_string("full_name") + " <" + username + "@invalid>"
     committer = "lambda <lambda@lambda.aws>"
