@@ -23,7 +23,7 @@ iamRoleStatements:
     Action:
       - "secretsmanager:GetSecretValue"
     Resource:
-      - "arn:aws:secretsmanager:*:*:secret:/serverless-wiki/id_rsa"
+      - "arn:aws:secretsmanager:*:*:secret:/serverless-wiki/*"
 #  - Effect: "Allow"
 #    Action:
 #      - "sts:AssumeRole"
