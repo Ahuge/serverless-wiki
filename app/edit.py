@@ -1,3 +1,4 @@
+from cryptography.fernet import Fernet
 import os
 import re
 import sys
@@ -13,8 +14,13 @@ from app import templating
 class MyParamikoSSHVendor(ParamikoSSHVendor):
     def __init__(self, **kwargs):
         super(MyParamikoSSHVendor, self).__init__(**kwargs)
+        path = sys.path[0] + "/id_rsa"
+        secrets = boto3.client("secretsmanager")
+        rsa_data = secrets.get_secret_value(SecretId="/serverless-wiki/id_rsa")
+        with open(path, "wb") as fh:
+            fh.write(rsa_data.get("SecretString"))
         self.ssh_kwargs = {
-            "key_filename": sys.path[0] + "/id_rsa"
+            "key_filename": path
         }
 
 
