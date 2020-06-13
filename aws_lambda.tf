@@ -14,7 +14,7 @@ resource "aws_iam_policy" "s3_write_access" {
     {
       "Action": "s3:*",
       "Resource": [
-        "arn:aws:s3:::serverless-wiki/*"
+        "arn:aws:s3:::tmp-serverless-wiki-test/*"
       ],
       "Effect": "Allow"
     },

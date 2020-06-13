@@ -1,0 +1,34 @@
+Resources:
+  ServerlessWikiBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: "${self:custom.parameters.bucketName.${self:custom.stage}, self:custom.parameters.bucketName.default}"
+      # DeletionPolicy: "${self:custom.parameters.DeletionPolicy.${self:custom.stage}, self:custom.parameters.DeletionPolicy.default}"
+      AccessControl: PublicRead
+      WebsiteConfiguration:
+        IndexDocument: index.html
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+          - ServerSideEncryptionByDefault:
+              SSEAlgorithm: AES256
+#      # Set the CORS policy
+#      CorsConfiguration:
+#        CorsRules:
+#          -
+#            AllowedOrigins:
+#              - '*'
+#            AllowedHeaders:
+#              - '*'
+#            AllowedMethods:
+#              - GET
+#              - PUT
+#              - POST
+#              - DELETE
+#              - HEAD
+#            MaxAge: 3000
+
+# Print out the name of the bucket that is created
+Outputs:
+  ServerlessWikiBucketName:
+    Value:
+      Ref: ServerlessWikiBucket

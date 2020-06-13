@@ -1,0 +1,79 @@
+service: serverless-wiki
+
+provider:
+  name: aws
+  runtime: python3.7
+  profile: AlexDemo
+  stage: ${self:custom.stage}
+  region: us-west-2
+
+  environment:
+    SOURCE_GIT_URL: "${self:custom.parameters.source_git_url.${self:custom.stage}, self:custom.parameters.source_git_url.default}"
+    NONCE: "${self:custom.parameters.nonce.${self:custom.stage}, self:custom.parameters.nonce.default}"
+    BUCKET_NAME: "${self:custom.parameters.bucketName.${self:custom.stage}, self:custom.parameters.bucketName.default}"
+  # environment:
+  #   API_ENDPOINT: ${self:custom.parameters.ApiEndpoint.${self:custom.stage}, self:custom.parameters.ApiEndpoint.default}
+  #   MANE_API_RESOURCE: ${self:custom.parameters.ApiResource.${self:custom.stage}, self:custom.parameters.ApiResource.default}
+  #   MANE_API_USERNAME_SECRET: ${self:custom.parameters.ApiUsernameSecret.${self:custom.stage}, self:custom.parameters.ApiUsernameSecret.default}
+   #  MANE_API_PASSWORD_SECRET:  ${self:custom.parameters.ApiPasswordSecret.${self:custom.stage}, self:custom.parameters.ApiPasswordSecret.default}
+
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+        - "s3:*"
+      Resource:
+        - Fn::Sub: "arn:aws:s3:::${self:custom.parameters.bucketName.${self:custom.stage}, self:custom.parameters.bucketName.default}"
+
+functions:
+  # Sync Query
+  serverless-edit: ${file(./lambdas/serverless-edit.yml)}
+
+resources:
+  # S3
+  - ${file(./resources/s3-bucket.yml)}
+
+package:
+  exclude:
+    - node_modules/**
+    - venv/**
+    - virtual_env/**
+    - launch_creds.sh
+    - Notes.md
+    - package.json
+    - package-lock.json
+
+custom:
+  stage: dev
+  pythonRequirements:
+    dockerizePip: non-linux
+    slim: true
+    noDeploy:
+      - botocore
+      - pip
+
+  parameters:
+    bucketName:
+      default: tmp-serverless-wiki-test
+      dev: tmp-serverless-wiki-test
+
+    distributionFolder:
+      default: website
+    indexDocument:
+      default: index.html
+
+    nonce:
+      default: Blep
+      dev: Bloop
+
+    source_git_url:
+      default: "git@githb.com:Ahuge/serverless-wiki-data"
+      dev: "git@githb.com:Ahuge/serverless-wiki-data"
+
+    DeletionPolicy:
+      default: Retain
+      dev: Delete
+
+plugins:
+  - serverless-python-requirements
+  - serverless-pseudo-parameters
+  - serverless-iam-roles-per-function

@@ -1,0 +1,26 @@
+handler: app/edit.handler
+timeout: 20
+events:
+  - http:
+      path: submit
+      method: post
+iamRoleStatementsInherit: true
+iamRoleStatements:
+  - Effect: "Allow"
+    Action:
+      - "s3:*"
+    Resource:
+      - Fn::Sub: "arn:aws:s3:::${self:custom.parameters.bucketName.${self:custom.stage}, self:custom.parameters.bucketName.default}/*"
+  - Effect: "Allow"
+    Action:
+      - "logs:CreateLogGroup"
+      - "logs:CreateLogStream"
+      - "logs:PutLogEvents"
+    Resource:
+      - "arn:aws:logs:*:*:*"
+#  - Effect: "Allow"
+#    Action:
+#      - "sts:AssumeRole"
+#    Principal:
+#      - "lambda.amazonaws.com"
+#    Sid: ""

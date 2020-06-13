@@ -7,3 +7,4 @@ source
 target
 *_creds.sh
 serverless-wiki-lambda.zip
+/builder.sh

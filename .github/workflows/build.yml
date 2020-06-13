@@ -1,0 +1,17 @@
+name: Build Website and push to s3
+
+on: [commit]
+
+jobs:
+    build-website:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: ./.github/actions/site-builder@master
+              name: Build Site
+              env:
+                GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                BUCKET_NAME: "tmp-serverless-wiki-test"
+                POST_URL: ${{ secrets.AWS_API_GATEWAY_POST_URL }}
+                AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+                AWS_SECRET_KEY: ${{ secrets.AWS_SECRET_KEY }}
+                AWS_DEFAULT_REGION: "us-west-2"
