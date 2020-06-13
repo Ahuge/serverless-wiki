@@ -1,4 +1,5 @@
 # This is a basic page!
 
 
-[test_page](test)
+### Pages of Information:
+  - [test_page](test.html)
