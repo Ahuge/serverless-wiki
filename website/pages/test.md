@@ -1,10 +1,5 @@
-# Test
+# This is a basic page!!!!!!!!!!
 
-## What
-This is just a test page to confirm that the markdown generator is working!
 
-## Why
-Because everything serverless can be kinda hard
-
-## Who
-Me
+### Pages of Information:
+  - [test_page](test)
