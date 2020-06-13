@@ -10,7 +10,7 @@ import boto3
 s3 = boto3.resource("s3")
 
 bucket = s3.Bucket(os.environ.get("BUCKET_NAME"))
-top = "target/website"
+top = "target"
 
 types = {
     ".html": "text/html",
@@ -19,6 +19,7 @@ types = {
     ".hocon": "application/hocon",
 }
 
+print("Uploading to {}".format(os.environ.get("BUCKET_NAME")))
 for root, _, files in os.walk(top):
     reldir = os.path.relpath(root, top)
     for file in files:
