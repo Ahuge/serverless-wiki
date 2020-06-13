@@ -23,7 +23,7 @@ class MyParamikoSSHVendor(ParamikoSSHVendor):
         rsa_data = secrets_manager.get_secret_value(SecretId=SECRET_PATH)
         with open(path, "wb") as fh:
             fh.write(rsa_data.get("SecretString").encode("utf-8"))
-        self.ssh_kwargs = {
+        self.kwargs = {
             "key_filename": path
         }
 
