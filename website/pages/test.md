@@ -2,4 +2,4 @@
 
 
 ### Pages of Information:
-  - [test_page](test)
+  - [test_page](test.html)
