@@ -12,7 +12,7 @@ POST_URL_LINE = "<!-- POST_URL -->"
 
 
 def apply_template(md, post_url):
-    with open(sys.path[0] + "/templates/index.html", "r") as template:
+    with open(sys.path[0] + "/index.html", "r") as template:
         result = ''
         line = template.readline()
         while line:
