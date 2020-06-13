@@ -10,7 +10,7 @@ export MARKDOWN_SOURCE_ROOT="source/website/pages"
 [[ -d source ]] || exit "Please set SOURCE to the source git directory"
 [[ -d target ]] || exit "Please set TARGET to the target git directory"
 
-ls -alFh
+ls -alFh source
 
 cp -r source/website/resources/* target
 cp -r source/users target
@@ -19,6 +19,7 @@ cp -r source/users target
 
 for file in `cd ${MARKDOWN_SOURCE_ROOT}; find . -name "*.md"`; do
   mkdir -p target/`dirname ${file}`
+  echo "Found ${file}"
   echo "Processing ${MARKDOWN_SOURCE_ROOT}/$file into target/${file%md}html"
   python ./source/.github/actions/site-builder/convert_page.py < ${MARKDOWN_SOURCE_ROOT}/${file} > target/${file%md}html
 done
