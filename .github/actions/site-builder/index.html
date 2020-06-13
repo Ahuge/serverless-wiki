@@ -15,6 +15,8 @@ serverless-wiki
 <section style="text-align: right; padding: 20px">
 <a id="loginlink" href="#" onclick="document.getElementById('login').style.display = 'block'">Log in</a>
 <a href="#" onclick="save()" class="edit">save</a>
+<div class="editnew"><input id="new-page" type="text"/><a href="#" onclick="saveas()" class="edit">save</a></div>
+<a href="#" onclick="newpage()" class="loggedin noedit">save</a>
 <a href="#" onclick="edit()" class="loggedin noedit">edit</a>
 <span id="loggedin" class="loggedin"></span>
 <a id="logoutlink" href="#" onclick="logout()" class="loggedin">Log out</a>
@@ -103,6 +105,14 @@ function edit() {
   $('.noedit').hide()
 }
 
+function newpage() {
+  $('.editnew').show()
+  simplemde = new SimpleMDE()
+
+  $('.noedit').hide()
+  $('.edit').show()
+}
+
 function page() {
   var segments = window.location.href.split('/')
   var last_segment = segments[segments.length-1]
@@ -117,6 +127,20 @@ function page() {
 function save() {
   $('.spinner').show()
   var url = "<!-- POST_URL -->?user=" + user.username + "&page=" + page() + "&auth=" + user.auth
+  post(url, function() {
+    document.location.reload()
+  },
+  function(status, err) {
+    $('.spinner').hide()
+    alert(err)
+  },
+  simplemde.value())
+}
+
+function saveas() {
+  var page_name = document.getElementById('new-page').value
+  $('.spinner').show()
+  var url = "<!-- POST_URL -->?user=" + user.username + "&page=" + page_name + "&auth=" + user.auth
   post(url, function() {
     document.location.reload()
   },
