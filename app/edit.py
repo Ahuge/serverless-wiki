@@ -22,7 +22,7 @@ class MyParamikoSSHVendor(ParamikoSSHVendor):
         print("Downloading SSH key from secrets manager:  {}".format(SECRET_PATH))
         rsa_data = secrets_manager.get_secret_value(SecretId=SECRET_PATH)
         with open(path, "wb") as fh:
-            fh.write(rsa_data.get("SecretString"))
+            fh.write(rsa_data.get("SecretString").encode("utf-8"))
         self.ssh_kwargs = {
             "key_filename": path
         }
