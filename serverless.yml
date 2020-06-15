@@ -2,10 +2,18 @@ service: serverless-wiki
 
 provider:
   name: aws
+  endpointType: REGIONAL
   runtime: python3.7
   profile: AlexDemo
   stage: ${self:custom.stage}
   region: us-west-2
+
+  resourcePolicy:
+    - Effect: Allow
+      Principal: '*'
+      Action: execute-api:Invoke
+      Resource:
+        - execute-api:/*/*/*
 
   environment:
     SOURCE_GIT_URL: "${self:custom.parameters.source_git_url.${self:custom.stage}, self:custom.parameters.source_git_url.default}"
